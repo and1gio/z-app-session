@@ -1,0 +1,33 @@
+# Logs
+*.log
+
+.mtj.tmp/
+hs_err_pid*
+
+# Runtime data
+*.pid
+*.seed
+
+# for text editors
+*.*~
+
+# nbproject for netbeans
+nbproject
+
+# for idea
+*.iml
+.idea/
+target/
+
+# for visual studio
+*.njsproj
+*.sln
+.vs/
+.ntvs_analysis.dat
+**/obj/Debug
+
+# Mac Folder Structure
+.DS_Store
+
+package-lock.json
+node_modules

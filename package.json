@@ -1,0 +1,23 @@
+{
+    "name": "@and1gio/z-app-session",
+    "version": "0.0.1",
+    "description": "ZApp Session Initializer",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/and1gio/z-app-session.git"
+    },
+    "author": "Giogri Maisuradze",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/and1gio/z-app-session/issues"
+    },
+    "homepage": "https://github.com/and1gio/z-app-session#readme",
+    "dependencies": {
+        "@and1gio/z-app-core": "0.0.2",
+        "jsonwebtoken": "8.2.2",
+        "mongoose": "5.1.4",
+        "passport": "0.4.0",
+        "passport-http-bearer": "1.0.1"
+    }
+}
