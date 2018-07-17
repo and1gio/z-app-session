@@ -1,6 +1,6 @@
 {
     "name": "@and1gio/z-app-session",
-    "version": "0.0.3",
+    "version": "1.0.0",
     "description": "ZApp Session Initializer",
     "main": "index.js",
     "repository": {
@@ -14,7 +14,7 @@
     },
     "homepage": "https://github.com/and1gio/z-app-session#readme",
     "dependencies": {
-        "@and1gio/z-app-core": "0.0.3",
+        "@and1gio/z-app-core": "1.0.0",
         "jsonwebtoken": "8.2.2",
         "mongoose": "5.1.4",
         "passport": "0.4.0",

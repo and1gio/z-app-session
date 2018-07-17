@@ -83,9 +83,8 @@ class SessionInitializer extends Initializer {
 
                         session.save((error) => {
                             if (error) {
-                                reject(this.app.utils.createError(500, 'middleware_error', [{
-                                    keyword: 'session_save_error',
-                                    message: 'session_save_error'
+                                reject(this.app.utils.createError(500, [{
+                                    keyword: 'session_save_error'
                                 }]));
                             } else {
                                 resolve(session);
@@ -103,9 +102,8 @@ class SessionInitializer extends Initializer {
                     return new Promise((resolve, reject) => {
                         Session.deleteOne({ token: token }, (error) => {
                             if (error) {
-                                reject(this.app.utils.createError(500, 'middleware_error', [{
-                                    keyword: 'session_delete_error',
-                                    message: 'session_delete_error'
+                                reject(this.app.utils.createError(500, [{
+                                    keyword: 'session_delete_error'
                                 }]));
                             } else {
                                 resolve(true);
