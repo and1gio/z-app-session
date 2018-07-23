@@ -1,6 +1,6 @@
 {
     "name": "@and1gio/z-app-session",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "ZApp Session Initializer",
     "main": "index.js",
     "repository": {

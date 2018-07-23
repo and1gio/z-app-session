@@ -95,6 +95,26 @@ class SessionInitializer extends Initializer {
 
                 check: passport.authenticate('bearer', { session: false }),
 
+                edit: async (token, path, data) => {
+                    return new Promise((resolve, reject) => {
+                        const findQuery = { token: token };
+
+                        const set = {};
+                        set[path] = data;
+
+                        Session.findOneAndUpdate(findQuery, { $set: set }, { new: true }, (err, record) => {
+                            if (err) {
+                                reject(this.app.utils.createError(500, [{
+                                    keyword: 'on_session_edit',
+                                    stackTrace: err
+                                }]));
+                            } else {
+                                resolve(record);
+                            }
+                        });
+                    });
+                },
+
                 /**
                  * @param {*} token
                  */
