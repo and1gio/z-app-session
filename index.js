@@ -95,6 +95,14 @@ class SessionInitializer extends Initializer {
 
                 check: passport.authenticate('bearer', { session: false }),
 
+                get: async (token) => {
+                    try {
+                        return await Session.findOne({ token: token });
+                    } catch (ex) {
+                        throw 'on_session_get';
+                    }
+                },
+
                 edit: async (token, path, data) => {
                     return new Promise((resolve, reject) => {
                         const findQuery = { token: token };
