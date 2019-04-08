@@ -83,9 +83,7 @@ class SessionInitializer extends Initializer {
 
                         session.save((error) => {
                             if (error) {
-                                reject(this.app.utils.createError(500, [{
-                                    keyword: 'session_save_error'
-                                }]));
+                                reject({ errors: [{ keyword: 'session_save_error' }] });
                             } else {
                                 resolve(session);
                             }
@@ -93,13 +91,36 @@ class SessionInitializer extends Initializer {
                     });
                 },
 
-                check: passport.authenticate('bearer', { session: false }),
+                check: function () {
+                    let authenticate = passport.authenticate('bearer', { session: false })
+
+                    let retrieveActionPerformer = function (req, res, next) {
+
+                        req.actionPerformer = {
+                            meta: {},
+                            user: {
+                                id: req.user.data.id,
+                                clientId: req.user.data.selected ? req.user.data.selected.clientId : null,
+                                sessionToken: req.user.token
+                            },
+                            application: {
+                                keyword: null,
+                                clientId: null,
+                                accessToken: null
+                            }
+                        };
+
+                        next();
+                    }
+
+                    return [authenticate, retrieveActionPerformer];
+                },
 
                 get: async (token) => {
                     try {
                         return await Session.findOne({ token: token });
                     } catch (ex) {
-                        throw 'on_session_get';
+                        reject({ errors: [{ keyword: 'on_session_get' }] });
                     }
                 },
 
@@ -112,10 +133,7 @@ class SessionInitializer extends Initializer {
 
                         Session.findOneAndUpdate(findQuery, { $set: set }, { new: true }, (err, record) => {
                             if (err) {
-                                reject(this.app.utils.createError(500, [{
-                                    keyword: 'on_session_edit',
-                                    stackTrace: err
-                                }]));
+                                reject({ errors: [{ keyword: 'on_session_edit' }] });
                             } else {
                                 resolve(record);
                             }
@@ -130,9 +148,7 @@ class SessionInitializer extends Initializer {
                     return new Promise((resolve, reject) => {
                         Session.deleteOne({ token: token }, (error) => {
                             if (error) {
-                                reject(this.app.utils.createError(500, [{
-                                    keyword: 'session_delete_error'
-                                }]));
+                                reject({ errors: [{ keyword: 'session_delete_error' }] });
                             } else {
                                 resolve(true);
                             }
